@@ -17,6 +17,14 @@ class Game {
   }
 
   registerEvents() {
+    document.addEventListener('keydown', (event) => {
+      let currentSymbol = (this.currentSymbol.textContent).toLowerCase();
+      console.log('Печатаем символ слова', currentSymbol)
+      let enteredSymbol = event.key.toLowerCase();
+      console.log('Символ ввода', enteredSymbol)
+      currentSymbol === enteredSymbol ? this.success() : this.fail();
+    }) 
+    
     /*
       TODO:
       Написать обработчик события, который откликается
