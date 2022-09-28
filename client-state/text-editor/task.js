@@ -1,4 +1,10 @@
 const editor = document.getElementById('editor');
 
-editor.value = window.localStorage.text;
-editor.addEventListener('input', () => window.localStorage.text = editor.value);
+function stateStorage() {
+    editor.value = localStorage.getItem('text');
+    editor.addEventListener('input', () => localStorage.setItem('text', editor.value));    
+}
+
+document.addEventListener('DOMContentLoaded', stateStorage);
+
+// localStorage.clear()
