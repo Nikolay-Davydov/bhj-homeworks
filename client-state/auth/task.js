@@ -43,21 +43,19 @@ function enter(event) {
     xhr.responseType = 'json';
     xhr.open('POST', 'https://netology-slow-rest.herokuapp.com/auth.php', true);    
     xhr.send(formData);
-    xhr.onload = function() {   
-        if (xhr.status != 200) {
-            alert(xhr.status + ': ' + xhr.statusText);
+
+    xhr.onload = function() {        
+        let authJSON = xhr.response;
+        if (authJSON.success) {
+            signinBlock.classList.remove('signin_active');
+            sayHello(authJSON.user_id);
+            localStorage.setItem("user_id", authJSON.user_id);
         }
         else {
-            let authJSON = xhr.response;
-            if (authJSON.success) {
-                signinBlock.classList.remove('signin_active');
-                sayHello(authJSON.user_id);
-                localStorage.setItem("user_id", authJSON.user_id);
-            }
-            else {
-                signinForm.reset();
-                alert('Неверный логин/пароль!');
-            }
+            signinForm.reset();
+            alert('Неверный логин/пароль!');
         }
     }
 }
+
+
